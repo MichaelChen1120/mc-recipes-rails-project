@@ -1,0 +1,1 @@
+# mc-recipes-rails-project
