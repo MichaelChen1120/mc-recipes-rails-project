@@ -1,4 +1,4 @@
-class Ingredient < ApplicationRecord
+class Ingredient < ApplicationRecord::Base
   has_many :recipe_ingredients
   has_many :recipes, though: :recipe_ingredients
 end
