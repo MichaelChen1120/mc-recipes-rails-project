@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20161102221603) do
 
   create_table "recipes", force: :cascade do |t|
     t.string   "name"
-    t.string   "desciption"
+    t.string   "description"
     t.string   "comment"
     t.string   "rating"
     t.datetime "created_at", null: false

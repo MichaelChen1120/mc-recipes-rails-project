@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.create(recipe_params)
 
     respond_to do |format|
       if @recipe.save
@@ -69,6 +69,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.fetch(:recipe, {})
+      params.require(:recipe).permit(:name, :description, :comment, :rating)
     end
 end
