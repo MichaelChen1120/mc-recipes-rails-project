@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
 
-  def index
+  def new
     @user = User.new
+  end
+
+  def create
+    @user = User.create(user_params)
+    session[:user_id] = @user.id
+    redirect_to user_path(@user)
   end
 
   def show
@@ -12,5 +18,7 @@ class UsersController < ApplicationController
     end
   end
 
-  
+  def user_params
+    params.require(:user).permit(:username, :password)
+  end
 end
