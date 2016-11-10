@@ -10,7 +10,8 @@
   </thead>
 
   <tbody>
-    <% @recipes.each do |recipe| %>
+    <% @recipes.each_with_index do |recipe, i| %>
+      <h3><%= "#{i+1}. " %><%= link_to recipe.name %></h3>
       <tr>
         <td><%= link_to 'Show', recipe %></td>
         <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>

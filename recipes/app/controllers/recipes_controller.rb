@@ -4,12 +4,17 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    if params[:user_id]
+      @recipes = User.find(params[:user_id]).recipes
+    else
+      @recipes = Recipe.all
+    end
   end
 
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @recipe = Recipe.find(params[:id])
   end
 
   # GET /recipes/new
@@ -24,7 +29,11 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.create(recipe_params)
+    @user = current_user
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save
+      @recipe.user_id = @user.id
+    end
 
     respond_to do |format|
       if @recipe.save
