@@ -7,9 +7,13 @@
 <br><br>
 
 <% @user.recipes.each do |recipe| %>
-  <p><%= link_to recipe.name, recipe_path(recipe) %></p>
+  <p><%= link_to recipe.name, user_recipe_path(recipe) %></p>
 <% end %>
 
 <br><br>
 
 <%= link_to "Add a new recipe", new_recipe_path %>
+
+<br><br>
+
+<%= link_to "Log Out", logout_path %>

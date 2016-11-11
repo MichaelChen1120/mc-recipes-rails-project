@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20161102221603) do
   create_table "ingredients", force: :cascade do |t|
     t.string   "name"
     t.string   "quantity"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,8 +33,9 @@ ActiveRecord::Schema.define(version: 20161102221603) do
     t.string   "description"
     t.string   "comment"
     t.string   "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
