@@ -12,7 +12,17 @@
 
 <br><br>
 
-<%= link_to "Add a new recipe", new_recipe_path %>
+<%= link_to "Add a new recipe", new_user_recipe_path(@user) %>
+
+<br><br>
+
+<% @user.ingredients.each do |ingredient| %>
+  <p><%= link_to ingredient.name, user_ingredient_path(ingredient) %></p>
+<% end %>
+
+<br><br>
+
+<%= link_to "Add a new ingredient", new_user_ingredient_path %>
 
 <br><br>
 

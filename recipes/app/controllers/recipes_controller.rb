@@ -15,17 +15,14 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    if params[:user_id]
       @user = current_user
-      @recipe = @user.recipes.find_by(id: params[:id])
-    else
-      @recipe = Recipe.find(params[:id])
-    end
+      @recipe = @user.recipes.find_by(user_id: params[:user_id], recipe_id: params[:id])
   end
 
   # GET /recipes/new
   def new
-    @recipe = Recipe.new
+    @recipe = Recipe.new(user_id: params[:user_id])
+    @ingredients = Ingredient.all
   end
 
   # GET /recipes/1/edit
@@ -35,11 +32,12 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
+    @user = current_user
     @recipe = Recipe.create(recipe_params)
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to user_recipe_path(@user.id, @recipe), notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
@@ -80,6 +78,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :comment, :rating, :user_id)
+      params.require(:recipe).permit(:name, :description, :comment, :rating, :user_id, ingredient_ids:[])
     end
 end

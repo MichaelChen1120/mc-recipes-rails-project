@@ -14,7 +14,7 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/new
   def new
-    @ingredient = Ingredient.new
+    @ingredient = Ingredient.new(user_id: params[:user_id])
   end
 
   # GET /ingredients/1/edit
@@ -24,11 +24,12 @@ class IngredientsController < ApplicationController
   # POST /ingredients
   # POST /ingredients.json
   def create
-    @ingredient = Ingredient.new(ingredient_params)
+    @user = current_user
+    @ingredient = Ingredient.create(ingredient_params)
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to @ingredient, notice: 'Ingredient was successfully created.' }
+        format.html { redirect_to user_ingredient_path(@user.id, @ingredient), notice: 'Ingredient was successfully created.' }
         format.json { render :show, status: :created, location: @ingredient }
       else
         format.html { render :new }
@@ -69,6 +70,6 @@ class IngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
-      params.fetch(:ingredient, {})
+      params.require(:ingredient).permit(:name, :quantity, :user_id)
     end
 end
