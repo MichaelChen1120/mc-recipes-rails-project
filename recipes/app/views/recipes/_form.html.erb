@@ -12,6 +12,13 @@
 
   <br>
 
+  <%= f.label :ingredients %>
+  <%= Ingredient.all.each do |ingredient| %>
+    <%= f.check_box :ingredient %>
+  <% end %>
+
+  <br>
+
   <%= link_to "Add an ingredient", new_ingredient_path %>
 
   <br>
@@ -25,6 +32,8 @@
   <%= f.text_field :rating %>
 
   <br><br>
+
+  <%= f.hidden_field :ingredient_id %>
 
   <% if recipe.errors.any? %>
     <div id="error_explanation">

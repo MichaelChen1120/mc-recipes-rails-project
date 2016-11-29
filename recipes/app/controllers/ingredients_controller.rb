@@ -4,17 +4,19 @@ class IngredientsController < ApplicationController
   # GET /ingredients
   # GET /ingredients.json
   def index
+    @user = current_user
     @ingredients = Ingredient.all
   end
 
   # GET /ingredients/1
   # GET /ingredients/1.json
   def show
+    @ingredient = Ingredient.find(params[:id])
   end
 
   # GET /ingredients/new
   def new
-    @ingredient = Ingredient.new(user_id: params[:user_id])
+    @ingredient = Ingredient.new
   end
 
   # GET /ingredients/1/edit
