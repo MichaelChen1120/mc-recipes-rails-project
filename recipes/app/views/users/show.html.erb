@@ -2,17 +2,7 @@
 
 <br><br>
 
-<h3>Your Recipes</h3>
-
-<br><br>
-
-<% @user.recipes.each do |recipe| %>
-  <p><%= link_to recipe.name, user_recipe_path(recipe) %></p>
-<% end %>
-
-<br><br>
-
-<%= link_to "Add a new recipe", new_user_recipe_path(@user) %>
+<h3><%= link_to 'Your Recipes', user_recipes_path(@user) %></h3>
 
 <br><br>
 

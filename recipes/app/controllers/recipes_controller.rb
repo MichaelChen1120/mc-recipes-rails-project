@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
       @user = current_user
-      @recipe = @user.recipes.find_by(user_id: params[:user_id], recipe_id: params[:id])
+      @recipe = @user.recipes.find(params[:id])
   end
 
   # GET /recipes/new
