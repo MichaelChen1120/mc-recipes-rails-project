@@ -6,13 +6,13 @@
   <br>
 
   <%= f.label :ingredients %>
-  <%= Ingredient.all.each do |ingredient| %>
-    <%= f.check_box :ingredient %>
+  <%= hidden_field_tag "recipe[ingredient_ids][]", nil %>
+  <% Ingredient.all.each do |ingredient| %>
+    <%= check_box_tag "recipe[ingredient_ids][]", ingredient.id, @recipe.ingredients.include?(ingredient), id: dom_id(ingredient, dom_id(@recipe)) %>
+    <%= label_tag dom_id(ingredient, dom_id(@recipe)), ingredient.name %><br>
   <% end %>
-
   <br>
-
-  <%= link_to "Add an ingredient", new_ingredient_path %>
+  <%= link_to "Add a new ingredient", new_ingredient_path %>
 
   <br><br>
 

@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index, :new, :show]
+  before_action :set_user, only: [:index, :new, :edit, :show]
   before_action :set_ingredients, only: [:new]
   # GET /recipes
   # GET /recipes.json
