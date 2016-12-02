@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :reviews
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'sessions#welcome'
@@ -9,11 +8,13 @@ Rails.application.routes.draw do
   post '/logout' => 'sessions#destroy'
 
   resources :users do
-    resources :recipes
+    resources :reviews, only: [:index]
+    resources :recipes do
+      resources :ingredients, only: [:show, :index, :new]
+      resources :reviews, only: [:show, :new, :edit, :destroy]
     end
-  resources :ingredients
-  resources :recipes do
-    resources :ingredients, only: [:show, :index, :new]
   end
+  resources :ingredients
+  resources :recipes, only: [:show]
 
 end

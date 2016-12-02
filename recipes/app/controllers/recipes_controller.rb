@@ -1,11 +1,11 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user, only: [:index, :new, :show]
+  before_action :set_ingredients, only: [:new]
   # GET /recipes
   # GET /recipes.json
   def index
     if params[:user_id]
-      @user = current_user
       @recipes = @user.recipes
     else
       @recipes = Recipe.all
@@ -15,15 +15,12 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-      @user = current_user
-      @recipe = @user.recipes.find(params[:id])
+    @recipe = @user.recipes.find(params[:id])
   end
 
   # GET /recipes/new
   def new
-    @user = current_user
-    @recipe = @user.recipes.build
-    @ingredients = Ingredient.all
+    @recipe = Recipe.new(:user => @user)
   end
 
   # GET /recipes/1/edit
@@ -78,8 +75,16 @@ class RecipesController < ApplicationController
       @recipe = Recipe.find(params[:id])
     end
 
+    def set_user
+      @user = current_user
+    end
+
+    def set_ingredients
+      @ingredients = Ingredient.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :comment, :rating, :user_id, :ingredient_ids)
+      params.require(:recipe).permit(:name, :user_id, :ingredient_ids)
     end
 end
