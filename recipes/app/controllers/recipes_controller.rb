@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index, :new, :edit, :show]
+  before_action :set_user, only: [:index, :new, :create, :edit, :show, :destroy]
   before_action :set_ingredients, only: [:new]
   # GET /recipes
   # GET /recipes.json
@@ -30,8 +30,6 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @user = current_user
-    @ingredients = Ingredient.all
     @recipe = @user.recipes.build(recipe_params)
 
     respond_to do |format|
@@ -50,7 +48,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.html { redirect_to user_recipe_path(@user.id, @recipe), notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
@@ -64,7 +62,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
+      format.html { redirect_to user_recipes_path(@user), notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -85,6 +83,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :user_id, :ingredient_ids)
+      params.require(:recipe).permit(:name, :user_id, :ingredient_ids => [])
     end
 end

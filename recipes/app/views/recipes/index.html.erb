@@ -10,12 +10,10 @@
   </thead>
 
   <tbody>
-    <% @recipes.each_with_index do |recipe, i| %>
-      <h3><%= "#{i+1}. " %><%= link_to recipe.name, recipe %></h3>
-      <tr>
-        <td><%= link_to 'Edit', edit_user_recipe_path(@user, recipe) %></td>
-        <td><%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @user.recipes.each_with_index do |recipe, i| %>
+      <h3><%= "#{i+1}. " %><%= link_to recipe.name, user_recipe_path(@user, recipe) %></h3>
+          <%= link_to 'Edit', edit_user_recipe_path(@user, recipe) %> <br>
+          <%= link_to 'Delete', user_recipe_path(@user, recipe), method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
   </tbody>
 </table>

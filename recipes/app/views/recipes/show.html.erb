@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h3>Name: <%= @recipe.name %></h3>
+<% @recipe.ingredients.each do |ingredient| %>
+  <%= ingredient.name %><br>
+<% end %>
 <br>
 
 <%= link_to 'Edit', edit_user_recipe_path(@user, @recipe) %> |
