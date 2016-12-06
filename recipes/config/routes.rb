@@ -8,13 +8,14 @@ Rails.application.routes.draw do
   post '/logout' => 'sessions#destroy'
 
   resources :users do
-    resources :reviews, only: [:index]
+    resources :reviews
     resources :recipes do
       resources :ingredients, only: [:show, :index, :new]
-      resources :reviews, only: [:show, :new, :edit, :destroy]
+      resources :reviews
     end
   end
   resources :ingredients
   resources :recipes, only: [:show]
+  resources :reviews, only: [:show]
 
 end

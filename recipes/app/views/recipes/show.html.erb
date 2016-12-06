@@ -4,7 +4,12 @@
 <% @recipe.ingredients.each do |ingredient| %>
   <%= ingredient.name %><br>
 <% end %>
+
 <br>
+
+<%= link_to 'Review this recipe', new_user_recipe_review_path(@user, @recipe) %>
+
+<br><br>
 
 <%= link_to 'Edit', edit_user_recipe_path(@user, @recipe) %> |
 <%= link_to 'Back', user_recipes_path(@user) %>
