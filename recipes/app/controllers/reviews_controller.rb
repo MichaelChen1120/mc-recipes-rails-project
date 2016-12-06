@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index, :new, :create]
+  before_action :set_user, only: [:index, :new, :create, :show, :edit]
   before_action :set_recipe, only: [:new, :create]
 
   # GET /reviews
@@ -26,11 +26,12 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
+
     @review = @user.reviews.build(review_params)
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to user_recipe_review_path(@user.id, @recipe.id, @review), notice: 'Review was successfully created.' }
+        format.html { redirect_to user_review_path(@user.id, @review), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }

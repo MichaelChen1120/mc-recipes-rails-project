@@ -1,6 +1,7 @@
-<%= form_for([@user, @recipe, @review]) do |f| %>
+<%= form_for [@user, @recipe, @review] do |f| %>
 
   <%= f.label :comment %>
+  <%= f.hidden_field :recipe_id %>
   <%= f.text_area :comment %>
   <br>
   <%= f.label :rating %>
