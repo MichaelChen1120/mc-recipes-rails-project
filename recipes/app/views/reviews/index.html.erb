@@ -10,12 +10,10 @@
   </thead>
 
   <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= link_to 'Show', review %></td>
-        <td><%= link_to 'Edit', edit_user_review_path(@user, review) %></td>
-        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @reviews.each_with_index do |review, i| %>
+        <h3><%= "#{i+1}. " %> <%= link_to review.recipe.name, review %></h3>
+        <%= link_to 'Edit', edit_user_review_path(@user, review) %><br>
+        <%= link_to 'Delete', user_review_path(@user, review), method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
   </tbody>
 </table>

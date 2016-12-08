@@ -11,5 +11,5 @@
 
 <br><br>
 
-<%= link_to 'Edit', edit_user_recipe_path(@user, @recipe) %> |
+<%= link_to 'Edit', edit_user_recipe_path(@user, @recipe) %> | <%= link_to 'Delete', user_recipe_path(@user, @recipe), method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
 <%= link_to 'Back', user_recipes_path(@user) %>
