@@ -2,7 +2,8 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :set_recipe, only: [:new, :create]
-
+  before_action :set_logged_in?
+  before_action :set_current_user
   # GET /reviews
   # GET /reviews.json
   def index
