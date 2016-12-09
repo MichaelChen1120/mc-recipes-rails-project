@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     end
   end
   resources :ingredients
-  resources :recipes, only: [:index, :show]
+  resources :recipes, only: [:index, :show] do
+    resources :reviews
+  end
   resources :reviews, only: [:index, :show]
 
 end

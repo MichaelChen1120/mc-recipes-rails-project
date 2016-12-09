@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reviews for <%= @recipe.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reviews.each_with_index do |review, i| %>
+        <h3><%= "#{i+1}. " %> <%= link_to review.user.username, review %></h3>
+            <%= 'Rating: ' %><%= review.rating %><br>
+            <% if @current_user.id == review.user.id %>
+              <%= link_to 'Edit', edit_user_review_path(@current_user, review) %><br>
+              <%= link_to 'Delete', user_review_path(@current_user, review), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', user_path(@current_user) %>

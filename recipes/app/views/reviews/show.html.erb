@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Review for</h3>
+<h3><%= @review.user.username %>'s review for <%= @review.recipe.name %></h3>
 
 <br>
 
@@ -12,6 +12,7 @@
 
 <br><br>
 
-
-<%= link_to 'Edit', edit_user_review_path(@user, @review) %> | <%= link_to 'Delete', user_review_path(@user, @review), method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-<%= link_to 'Back', user_reviews_path(@user) %>
+<% if @current_user.id == @review.user.id %>
+<%= link_to 'Edit', edit_user_review_path(@current_user, @review) %> | <%= link_to 'Delete', user_review_path(@current_user, @review), method: :delete, data: { confirm: 'Are you sure?' }%><br><br>
+<% end %>
+<%= link_to 'Back', user_reviews_path(@current_user) %>

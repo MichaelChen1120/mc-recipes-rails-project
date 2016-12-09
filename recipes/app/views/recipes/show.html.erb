@@ -6,11 +6,22 @@
 <% end %>
 
 <br>
-<%= link_to 'Reviews', reviews_path %>
 
-<%= link_to 'Review this recipe', new_user_recipe_review_path(@user, @recipe) %>
+<% if @current_user.id == @recipe.user.id %>
+
+<%= link_to 'Edit', edit_user_recipe_path(@current_user, @recipe) %> | <%= link_to 'Delete', user_recipe_path(@current_user, @recipe), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<% end %>
 
 <br><br>
 
-<%= link_to 'Edit', edit_user_recipe_path(@user, @recipe) %> | <%= link_to 'Delete', user_recipe_path(@user, @recipe), method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-<%= link_to 'Back', user_recipes_path(@user) %>
+<%= link_to 'Reviews for this recipe', recipe_reviews_path(@recipe) %>
+
+<br>
+
+<%= link_to 'Review this recipe', new_user_recipe_review_path(@current_user, @recipe) %>
+
+<br><br>
+
+<%= link_to 'My recipes', user_recipes_path(@current_user) %><br>
+<%= link_to 'View all recipes', recipes_path %>

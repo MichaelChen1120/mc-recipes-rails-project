@@ -9,8 +9,11 @@ class ReviewsController < ApplicationController
   def index
     if params[:user_id]
       @reviews = @user.reviews
+      render :user_index
     else
-      @reviews = Review.all
+      @recipe = Recipe.find_by(id: params[:recipe_id])
+      @reviews = @recipe.reviews
+      render :recipe_index
     end
   end
 
