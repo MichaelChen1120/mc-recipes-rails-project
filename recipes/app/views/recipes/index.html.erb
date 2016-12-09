@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Recipes</h1>
+<h1><%= @user.username %>'s Recipes</h1>
 
 <table>
   <thead>
@@ -10,10 +10,12 @@
   </thead>
 
   <tbody>
-    <% @user.recipes.each_with_index do |recipe, i| %>
+    <% @recipes.each_with_index do |recipe, i| %>
       <h3><%= "#{i+1}. " %><%= link_to recipe.name, user_recipe_path(@user, recipe) %></h3>
-          <%= link_to 'Edit', edit_user_recipe_path(@user, recipe) %> <br>
-          <%= link_to 'Delete', user_recipe_path(@user, recipe), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if params[:user_id] == @current_user.id %>
+            <%= link_to 'Edit', edit_user_recipe_path(@user, recipe) %> <br>
+            <%= link_to 'Delete', user_recipe_path(@user, recipe), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
     <% end %>
   </tbody>
 </table>

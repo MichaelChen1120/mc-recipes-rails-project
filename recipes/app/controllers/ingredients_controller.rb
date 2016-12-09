@@ -66,6 +66,10 @@ class IngredientsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_logged_in?
+      redirect_to root_path if !logged_in?
+    end
+
     def set_ingredient
       @ingredient = Ingredient.find(params[:id])
     end

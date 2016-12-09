@@ -6,7 +6,11 @@ class ReviewsController < ApplicationController
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = Review.all
+    if params[:user_id]
+      @reviews = @user.reviews
+    else
+      @reviews = Review.all
+    end
   end
 
   # GET /reviews/1
@@ -66,6 +70,10 @@ class ReviewsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_logged_in?
+      redirect_to root_path if !logged_in?
+    end
+
     def set_review
       @review = Review.find(params[:id])
     end
@@ -75,7 +83,11 @@ class ReviewsController < ApplicationController
     end
 
     def set_user
-      @user = current_user
+      @user = User.find_by(id: params[:user_id])
+    end
+
+    def set_current_user
+      @current_user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

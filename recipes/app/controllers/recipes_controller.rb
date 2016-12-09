@@ -2,13 +2,17 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:index, :new, :create, :edit, :show, :destroy]
   before_action :set_ingredients, only: [:new]
+  before_action :set_current_user
+  before_action :set_logged_in?
   # GET /recipes
   # GET /recipes.json
   def index
     if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
       @recipes = @user.recipes
     else
       @recipes = Recipe.all
+      render :allrecipes
     end
   end
 
@@ -69,16 +73,24 @@ class RecipesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_logged_in?
+      redirect_to root_path if !logged_in?
+    end
+
     def set_recipe
       @recipe = Recipe.find(params[:id])
     end
 
     def set_user
-      @user = current_user
+      @user = User.find_by(id: params[:user_id])
     end
 
     def set_ingredients
       @ingredients = Ingredient.all
+    end
+
+    def set_current_user
+      @current_user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
