@@ -5,6 +5,11 @@
 
   <br>
 
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <br>
+
   <%= f.label :ingredients %>
   <%= hidden_field_tag "recipe[ingredient_ids][]", nil %>
   <% Ingredient.all.each do |ingredient| %>
@@ -27,6 +32,13 @@
       </ul>
     </div>
   <% end %>
+
+  <br>
+
+  <%= f.label :instructions %>
+  <%= f.text_area :instructions %>
+
+  <br>
 
   <div class="actions">
     <%= f.submit %>
