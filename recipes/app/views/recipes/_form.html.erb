@@ -10,14 +10,21 @@
 
   <br>
 
-  <%= f.label :ingredients %>
-  <%= hidden_field_tag "recipe[ingredient_ids][]", nil %>
-  <% Ingredient.all.each do |ingredient| %>
-    <%= check_box_tag "recipe[ingredient_ids][]", ingredient.id, @recipe.ingredients.include?(ingredient), id: dom_id(ingredient, dom_id(@recipe)) %>
-    <%= label_tag dom_id(ingredient, dom_id(@recipe)), ingredient.name %><br>
+  <h3>Ingredients</h3>
+
+  <%= f.fields_for :ingredients do |ingredient| %>
+  <p>
+      <%= ingredient.label :name %>
+      <%= ingredient.text_field :name %>
+      <%= ingredient.label :quantity %>
+      <%= ingredient.text_field :quantity %>
+      <%= ingredient.check_box :_destroy %>
+      <%= ingredient.label :_destroy, 'delete' %>
+  </p>
   <% end %>
-  <br>
-  <%= link_to "Add a new ingredient", new_ingredient_path %>
+
+  <%= f.submit 'Add Ingredient', name: "add_ingredient" %>
+  <%= f.submit 'Delete selected ingredients', name: "remove_ingredient" %>
 
   <br><br>
 
