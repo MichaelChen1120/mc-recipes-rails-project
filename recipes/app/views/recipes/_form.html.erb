@@ -13,18 +13,11 @@
   <h3>Ingredients</h3>
 
   <%= f.fields_for :ingredients do |ingredient| %>
-  <p>
-      <%= ingredient.label :name %>
-      <%= ingredient.text_field :name %>
-      <%= ingredient.label :quantity %>
-      <%= ingredient.text_field :quantity %>
-      <%= ingredient.check_box :_destroy %>
-      <%= ingredient.label :_destroy, 'delete' %>
-  </p>
+    <div id= "ingredients">
+        <%= render 'ingredients' %>
+    </div>
+    <a href= "javascript:;" id="addNewIngredient">Add new ingredient</a>
   <% end %>
-
-  <%= f.submit 'Add Ingredient', name: "add_ingredient" %>
-  <%= f.submit 'Delete selected ingredients', name: "remove_ingredient" %>
 
   <br><br>
 
@@ -48,6 +41,11 @@
   <br>
 
   <div class="actions">
+    <%= hidden_field_tag :user_id, @current_user.id %>
     <%= f.submit %>
   </div>
 <% end %>
+
+<div style="display: none;" id= "new_ingredient_form">
+  <%= render partial: "ingredients" %>
+</div>
