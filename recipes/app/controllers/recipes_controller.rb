@@ -35,10 +35,6 @@ class RecipesController < ApplicationController
   def create
     @recipe = @current_user.recipes.build(recipe_params)
 
-    if params[:add_ingredient]
-      @recipe.ingredients.build
-    elsif params[:remove_ingredient]
-    else
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to user_recipe_path(@current_user.id, @recipe), notice: 'Recipe was successfully created.' }
@@ -48,7 +44,6 @@ class RecipesController < ApplicationController
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
       end
-    end
   end
 
   # PATCH/PUT /recipes/1
@@ -95,6 +90,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :user_id, :ingredient_ids => [], ingredients_attributes: [:name, :description, :instructions])
+      params.require(:recipe).permit(:name, :description, :instructions, :user_id, :ingredient_ids => [], ingredients_attributes: [:name, :quantity, :id])
     end
 end

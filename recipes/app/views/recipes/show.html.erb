@@ -1,15 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Name: <%= @recipe.name %></h3>
-<% @recipe.ingredients.each do |ingredient| %>
-  <%= ingredient.name %><br>
+<h2><%= @recipe.user.username %>'s <%= @recipe.name%> recipe</h3>
+
+<br>
+
+<%= @recipe.description %>
+
+<br>
+
+<h3>Ingredients</h3>
+
+<br>
+
+<% @recipe.ingredients.each_with_index do |ingredient, i| %>
+  <%= "#{i+1}. "%><%= ingredient.quantity %> <%= ingredient.name %><br>
 <% end %>
 
 <br>
 
+<h3>Instructions</h3>
+
+<br>
+
+<%= @recipe.instructions %>
+
+<br><br><br><br>
+
 <% if @current_user.id == @recipe.user.id %>
 
-<%= link_to 'Edit', edit_user_recipe_path(@current_user, @recipe) %> | <%= link_to 'Delete', user_recipe_path(@current_user, @recipe), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Edit recipe', edit_user_recipe_path(@current_user, @recipe) %> | <%= link_to 'Delete recipe', user_recipe_path(@current_user, @recipe), method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <% end %>
 
