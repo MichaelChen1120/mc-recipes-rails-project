@@ -1,7 +1,7 @@
 <h1>All Recipes</h1>
 
 <% @recipes.each_with_index do |recipe, i| %>
-  <%= "#{i+1} ." %><%= link_to recipe.name, recipe_path(recipe) %> <%= "by #{recipe.user.username}" %> <br>
+  <%= "#{i+1} ." %><%= link_to recipe.name, recipe_path(recipe) %> by <%= link_to recipe.user.name, user_path(recipe.user) %> <br>
 <% end %>
 
 <br><br>

@@ -13,7 +13,7 @@
 <br>
 
 <% @recipe.ingredients.each_with_index do |ingredient, i| %>
-  <%= "#{i+1}. "%><%= ingredient.quantity %> <%= ingredient.name %><br>
+  <%= "#{i+1}. "%> <%= ingredient.name %><br>
 <% end %>
 
 <br>
@@ -34,7 +34,17 @@
 
 <br><br>
 
-<%= link_to 'Reviews for this recipe', recipe_reviews_path(@recipe) %>
+<h3>What people think of <%= @recipe.name %></h3>
+
+<% @recipe.reviews.take(3).each_with_index do |review,i| %>
+  <%= "#{i+1}. " %><%= review.comment %><br>
+  rating: <%= review.rating %><br>
+   reviewer: <%= link_to review.user.username, user_path(review.user) %>
+<% end %>
+
+<br><br>
+
+<%= link_to 'More reviews for this recipe', recipe_reviews_path(@recipe) %>
 
 <br>
 

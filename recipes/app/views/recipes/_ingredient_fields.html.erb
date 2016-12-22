@@ -1,8 +1,11 @@
 <fieldset>
   <%= f.label :name, "Ingredient name" %>
   <%= f.text_field :name %>
-  <%= f.label :quantity, "Quantity" %>
-  <%= f.text_field :quantity%><br>
   <%= f.hidden_field :_destroy %>
-  <%= link_to "remove", "#", class: "remove_fields" %><br><br>
+  <%= link_to "Remove ingredient", "#", class: "remove_fields" %><br><br>
+  <%= f.fields_for :recipe_ingredients do |r| %>
+    <%= r.label :quantity %>
+    <%= r.text_field :quantity %>
+    <%= f.hidden_field :_destroy %>
+  <% end %>
 </fieldset>
