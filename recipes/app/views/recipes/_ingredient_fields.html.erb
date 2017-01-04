@@ -6,6 +6,6 @@
   <%= f.fields_for :recipe_ingredients do |r| %>
     <%= r.label :quantity %>
     <%= r.text_field :quantity %>
-    <%= f.hidden_field :_destroy %>
+    <%= r.hidden_field :_destroy %>
   <% end %>
 </fieldset>
