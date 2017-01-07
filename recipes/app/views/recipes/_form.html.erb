@@ -1,16 +1,25 @@
 <%= form_for([@current_user, @recipe]) do |f| %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <br>
+
+  <h3>Name</h3>
+
+  <fieldset>
+    <%= f.text_field :name %>
+  </fieldset>
 
   <br>
 
-  <%= f.label :description %>
-  <%= f.text_area :description, rows: "10" %>
+  <h3>Description</h3>
+
+  <fieldset>
+    <%= f.text_area :description, rows: "10" %>
+  </fieldset>
 
   <br>
 
   <h3>Ingredients</h3>
+  
     <fieldset id="recipe-ingredients">
       <ol>
         <%= f.fields_for :recipe_ingredients do |task| %>
@@ -36,8 +45,11 @@
 
   <br>
 
-  <%= f.label :instructions %>
-  <%= f.text_area :instructions, rows: "10" %>
+  <h3>Instructions</h3>
+
+  <fieldset>
+    <%= f.text_area :instructions, rows: "10" %>
+  </fieldset>
 
   <br><br>
 
