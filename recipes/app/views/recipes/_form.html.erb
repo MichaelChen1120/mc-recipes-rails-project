@@ -13,12 +13,13 @@
   <h3>Ingredients</h3>
     <fieldset id="recipe-ingredients">
       <ol>
-    <%= f.fields_for :recipe_ingredients do |task| %>
-      <%= render 'recipe_ingredient_fields', f: task %>
-    <% end %>
-  </ol>
+        <%= f.fields_for :recipe_ingredients do |task| %>
+          <%= render 'recipe_ingredient_fields', f: task %>
+        <% end %>
+      </ol>
     <%= link_to_add_association 'Add ingredient', f, :recipe_ingredients, 'data-association-insertion-node' => "#recipe-ingredients ol", 'data-association-insertion-method' => "append", :wrap_object => Proc.new {|recipe_ingredient| recipe_ingredient.build_ingredient; recipe_ingredient } %>
     </fieldset>
+
   <br><br>
 
   <% if recipe.errors.any? %>
