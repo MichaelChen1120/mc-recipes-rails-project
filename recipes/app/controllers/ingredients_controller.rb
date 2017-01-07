@@ -26,7 +26,6 @@ class IngredientsController < ApplicationController
   # POST /ingredients
   # POST /ingredients.json
   def create
-    @user = current_user
     @ingredient = Ingredient.create(ingredient_params)
 
     respond_to do |format|
@@ -76,6 +75,6 @@ class IngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
-      params.require(:ingredient).permit(:name, :user_id)
+      params.require(:ingredient).permit(:name)
     end
 end

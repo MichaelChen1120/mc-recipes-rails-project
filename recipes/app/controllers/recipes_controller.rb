@@ -90,6 +90,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :instructions, :user_id, ingredients_attributes: [:name, :id], recipe_ingredients_attributes: [:ingredient_id, :recipe_id, :quantity, :id] )
+      params.require(:recipe).permit(:name, :description, :instructions, :user_id, :recipe_ingredients_attributes => [:id, :ingredient_id, :recipe_id, :quantity, :_destroy, :ingredient_attributes => [:id, :_destroy, :ingredient_id, :name]] )
     end
 end
