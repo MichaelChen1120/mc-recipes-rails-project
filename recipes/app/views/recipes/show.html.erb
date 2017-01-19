@@ -12,8 +12,8 @@
 
 <br>
 
-<% @recipe.ingredients.each_with_index do |ingredient, i| %>
-  <%= "#{i+1}. "%> <%= ingredient.name %><br>
+<% @recipe.recipe_ingredients.each_with_index do |ing, i| %>
+  <%= "#{i+1}. "%><%= ing.quantity %> <%= ing.ingredient.name %><br>
 <% end %>
 
 <br>
