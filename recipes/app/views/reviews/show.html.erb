@@ -2,11 +2,7 @@
 
 <h3><%= @review.user.username %>'s review for <%= @review.recipe.name %></h3>
 
-<br>
-
-<%= @review.comment %>
-
-<br>
+<%= simple_format @review.comment %>
 
 <h3>Rating: <%= @review.rating %></h3>
 

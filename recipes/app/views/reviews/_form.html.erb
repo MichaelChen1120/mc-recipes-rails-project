@@ -2,10 +2,10 @@
 
   <%= f.label :comment %>
   <%= f.hidden_field :recipe_id %>
-  <%= f.text_area :comment %>
+  <%= f.text_area :comment, rows: "10" %>
   <br>
   <%= f.label :rating %>
-  <%= f.number_field :rating %>
+  <%= f.select :rating, options_for_select([1,2,3,4,5]) %>
   <br><br>
   <% if review.errors.any? %>
     <div id="error_explanation">
