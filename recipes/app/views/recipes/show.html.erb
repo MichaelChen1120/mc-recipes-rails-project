@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @recipe.user.username %>'s <%= @recipe.name%> recipe</h3>
+<h2><%= @recipe.name%> recipe</h3>
 
 <br>
 
@@ -22,7 +22,7 @@
 
 <br>
 
-<%= @recipe.instructions %>
+<%= simple_format @recipe.instructions %>
 
 <br><br><br><br>
 
