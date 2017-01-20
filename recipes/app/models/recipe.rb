@@ -14,8 +14,4 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def highest_rated
-
-  end
-
 end

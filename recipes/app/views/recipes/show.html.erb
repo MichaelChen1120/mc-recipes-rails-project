@@ -34,6 +34,8 @@
 
 <br><br>
 
+<% if @recipe.reviews.present? %>
+
 <h3>What people think of <%= @recipe.name %></h3>
 
 <% @recipe.reviews.take(3).each_with_index do |review,i| %>
@@ -47,6 +49,12 @@
 <%= link_to 'More reviews for this recipe', recipe_reviews_path(@recipe) %>
 
 <br>
+
+<% else %>
+
+<h3>Be the first to review <%= @recipe.name %>!</h3>
+
+<% end %>
 
 <%= link_to 'Review this recipe', new_user_recipe_review_path(@current_user, @recipe) %>
 
