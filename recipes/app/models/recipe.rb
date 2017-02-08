@@ -49,7 +49,20 @@ class Recipe < ApplicationRecord
     self.reviews.each do |review|
       ratings << review.rating
     end
-    ratings.sum / ratings.size_to_i
+    ratings.sum / ratings.size
+  end
+
+  def rating=(rating)
+    rating = 0
+  end
+
+  def self.sort_by_average_rating
+    avg = []
+    self.all.each do |recipe|
+    recipe.rating=  recipe.average_rating
+    avg << recipe
+    end
+    avg.sort_by {|recipe| -recipe.average_rating}
   end
 
 end
